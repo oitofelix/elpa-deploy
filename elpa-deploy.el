@@ -119,9 +119,9 @@ Presumably file ‘*-pkg.el’ has the ‘define-package’ form as its first."
 			   (error "Package definition file ‘%s’ doesn’t exist"
 				  (f-filename pkg-file)))
     (save-excursion
-      (goto-char (point-min))
       (when (or (package-process-define-package (read (current-buffer)))
 		(error "Can’t find ‘define-package’ in %s" pkg-file))
+        (goto-char (point-min))
 	(down-list)
 	(forward-sexp 2)
 	(kill-sexp)
