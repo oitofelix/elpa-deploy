@@ -7,7 +7,7 @@
 ;; Package: elpa-deploy
 ;; Homepage: https://github.com/oitofelix/elpa-deploy
 
-;; Version: 0
+;; Version: 20190928.1939
 ;; Package-Requires: ((emacs "24") (f "0.0"))
 
 ;; This program is free software: you can redistribute it and/or modify
