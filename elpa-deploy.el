@@ -47,7 +47,9 @@
 
 (cl-defun elpa-deploy
     (path upload-base &aux
-	  (version (format-time-string "%Y%m%d.%H%M"))
+	  (version (format "%d.%d"
+                           (string-to-number (format-time-string "%Y%m%d"))
+                           (string-to-number (format-time-string "%H%M"))))
 	  (package-name (f-base path)))
   "Deploy simple or multi-file package.
 PATH is the filename of a single ‘.el’ file (simple package) or a
@@ -69,7 +71,7 @@ UPLOAD-BASE."
      (mapc #'delete-file
 	   (directory-files
 	    upload-base 'full
-	    (format "^%s-[[:digit:]]\\{8\\}\\.[[:digit:]]\\{4\\}\\.el$"
+	    (format "^%s-[[:digit:]]\\{8\\}\\.[[:digit:]]\\{3,4\\}\\.el$"
                     package-name)))
      (let ((package-archive-upload-base upload-base))
        (package-upload-file path)))
@@ -91,7 +93,7 @@ UPLOAD-BASE."
      (mapc #'delete-file
 	   (directory-files
 	    upload-base 'full
-	    (format "^%s-[[:digit:]]\\{8\\}\\.[[:digit:]]\\{4\\}\\.tar$"
+	    (format "^%s-[[:digit:]]\\{8\\}\\.[[:digit:]]\\{3,4\\}\\.tar$"
                     package-name)))
      (let ((package-archive-upload-base upload-base))
        (package-upload-file file))
