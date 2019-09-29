@@ -64,7 +64,7 @@ uploads the result.
 
 See ‘package-archive-upload-base’ for the exact meaning of
 UPLOAD-BASE."
-  (interactive "fPackage file or directory: \nDArchive upload base directory: ")
+  (interactive "GPackage file or directory: \nDArchive upload base directory: ")
   (pcase path
     ((pred file-regular-p)
      (elpa-deploy--update-version-string-simple-package path version)
