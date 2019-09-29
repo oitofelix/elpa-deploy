@@ -78,11 +78,16 @@ UPLOAD-BASE."
                                       (format "%s-%s.tar"
                                               package-name version)))))
      (elpa-deploy--update-version-string-multi-file-package path version)
-     (call-process "tar" nil (list (current-buffer) nil) nil "--create"
+     (call-process "tar" nil nil nil "--create"
 		   "--file" file
 		   (format "--transform=s,^%s,%s-%s,"
                            package-name package-name version)
-		   (f-relative path))
+                   "--exclude-vcs"
+                   "--exclude-backups"
+                   "--exclude=*.elc"
+                   (format "--exclude=%s-autoloads.el" package-name)
+                   (format "--directory=%s" (f-dirname file))
+		   (f-relative path (f-dirname file)))
      (mapc #'delete-file
 	   (directory-files
 	    upload-base 'full
