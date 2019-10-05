@@ -45,6 +45,7 @@
 (require 'f)
 
 
+;;;###autoload
 (cl-defun elpa-deploy
     (path upload-base &aux
 	  (version (format "%d.%d"
